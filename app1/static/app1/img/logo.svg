@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0%" stop-color="#3cdddb"/>
+      <stop offset="100%" stop-color="#1976d2"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="20" fill="url(#g)"/>
+  <g transform="translate(40,45)" fill="#fff">
+    <text x="20" y="40" font-family="Poppins, sans-serif" font-size="20" font-weight="700">G</text>
+    <text x="60" y="40" font-family="Poppins, sans-serif" font-size="12">V E M</text>
+    <text x="20" y="80" font-family="Poppins, sans-serif" font-size="12">School</text>
+  </g>
+</svg>
