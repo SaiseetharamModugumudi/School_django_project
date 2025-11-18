@@ -2,16 +2,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gandhi Vidyalaya School Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Management Dashboard</title>
 
   <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
-    /* ===== Base Styling ===== */
-    body {
+     body {
       font-family: "Poppins", sans-serif;
       color: #333;
       background: url("{% static 'images/download.jpeg' %}") no-repeat center center fixed;
@@ -269,15 +268,16 @@
 </head>
 
 <body>
+  
   <div class="main-container">
     <!-- ===== Header ===== -->
     <div class="header-row">
       <div class="logo">
-        <img src="{% static 'images/download.jpeg' %}" alt="School Logo" />
+  <img src="{% static 'images/download.jpeg' %}" alt="School Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
       </div>
       <div class="title-box">GANDHI VIDYALAYA (E.M) HIGH SCHOOL</div>
       <div class="logo">
-        <img src="{% static 'images/download.jpeg' %}" alt="School Logo" />
+  <img src="{% static 'images/download.jpeg' %}" alt="School Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
       </div>
     </div>
 
@@ -288,135 +288,143 @@
       <a class="nav-tab {% if page == 'teacher' %}active-tab{% endif %}" href="{% url 'teacher' %}">Teacher</a>
       <a class="nav-tab {% if page == 'total' %}active-tab{% endif %}" href="{% url 'total' %}">Total Data</a>
     </div>
-
-    <!-- ===== Scroll Banner ===== -->
-    <div class="scroll-text">
-      Hurry Up Parents📢 Admissions are open, Join Gandhi Vidyalaya School today!
-    </div>
-
+    <div class="scroll-text" style="display: flex; justify-content: center;">
+    <span>Hurry Up Parents📢 Admissions are open , Join our School immediately 📢</span>
+  </div><br>    
     <!-- ===== Dynamic Content ===== -->
     <div class="content-area">
       {% if page == 'home' %}
         <h4>Welcome to Gandhi Vidyalaya School</h4>
-        <p>Manage all student and teacher data in one place, efficiently and securely.</p>
-        <ul>
-          <li>Easy record creation, editing, and deletion</li>
-          <li>Separate dashboards for students and teachers</li>
-          <li>Combined data view for admins</li>
-          <li>Responsive design for mobile and desktop</li>
-        </ul>
-        <p style="text-align:right; margin-top:30px;"><strong>- Principal</strong></p>
+        <p>This organisation helps manage student and teacher records with efficiency.</p>
+        <p>We provide a user-friendly interface for adding, updating, and deleting student and teacher records.</p>
+        <p>We also provide a dashboard to view the total number of students and teachers.</p>
+        <p>We are committed to providing a secure and reliable platform for managing student and teacher records.</p>
+        <p>Thank you for choosing Gandhi Vidyalaya School.</p>
+        <p style="display: flex; justify-content: right; margin-top: 40px;">- Principal</p>
       {% endif %}
 
       {% if page == 'student' %}
-        <div class="form-class">
-          <h4>Student Form</h4>
-          <form method="POST">
-            {% csrf_token %}
-            {{ student_form.as_p }}
-            <button type="submit" class="btn btn-primary">Add Student</button>
-          </form>
+      <div class="form-class">
+        <h4>Student Form</h4>
+        <form method="POST" class="mt-3">
+          {% csrf_token %}
+          {{ student_form.as_p }}
+          <button type="submit" class="btn btn-primary mt-2">Add Student</button>
+        </form>
         </div>
-
-        <h5>Students Details</h5>
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Name</th><th>Age</th><th>Grade</th><th>Section</th><th>Gender</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for stu in students %}
-              <tr>
-                <td>{{ stu.name }}</td>
-                <td>{{ stu.age }}</td>
-                <td>{{ stu.grade }}</td>
-                <td>{{ stu.section }}</td>
-                <td>{{ stu.gender }}</td>
-              </tr>
-              {% empty %}
-              <tr><td colspan="5" class="text-center">No students found.</td></tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
+        <h5 class="mt-4">Students Details</h5>
+        <table class="table table-bordered">
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Grade</th>
+            <th>Section</th>
+            <th>Gender</th>
+            <!-- <th>Actions</th> -->
+          </tr>
+          {% for stu in students %}
+          <tr>
+            <td>{{ stu.name }}</td>
+            <td>{{ stu.age }}</td>
+            <td>{{ stu.grade }}</td>
+            <td>{{ stu.section }}</td>
+            <td>{{ stu.gender }}</td>
+          {% empty %}
+          <tr><td colspan="6" class="text-center">No students found.</td></tr>
+          {% endfor %}
+        </table>
       {% endif %}
 
       {% if page == 'teacher' %}
-        <div class="form-class">
-          <h4>Teacher Form</h4>
-          <form method="POST">
-            {% csrf_token %}
-            {{ teacher_form.as_p }}
-            <button type="submit" class="btn btn-primary">Add Teacher</button>
-          </form>
+      <div class="form-class">
+        <h4>Teacher Form</h4>
+        <form method="POST" class="mt-3">
+          {% csrf_token %}
+          {{ teacher_form.as_p }} <br>
+          <button type="submit" class="btn btn-primary mt-2">Add Teacher</button>
+        </form>
         </div>
-
-        <h5>Teachers Details</h5>
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Name</th><th>Subject</th><th>Experience</th><th>Gender</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for tea in teachers %}
-              <tr>
-                <td>{{ tea.name }}</td>
-                <td>{{ tea.subject }}</td>
-                <td>{{ tea.experience_years }}</td>
-                <td>{{ tea.gender }}</td>
-              </tr>
-              {% empty %}
-              <tr><td colspan="4" class="text-center">No teachers found.</td></tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
+        <h5 class="mt-4">Teachers Details</h5>
+        <table class="table table-bordered">
+          <tr>
+            <th>Name</th>
+            <th>Subject</th>
+            <th>Experience</th>
+            <th>Gender</th>
+            <!-- <th>Actions</th> -->
+          </tr>
+          {% for tea in teachers %}
+          <tr>
+            <td>{{ tea.name }}</td>
+            <td>{{ tea.subject }}</td>
+            <td>{{ tea.experience_years }}</td>
+            <td>{{ tea.gender }}</td>
+          {% empty %}
+          <tr><td colspan="5" class="text-center">No teachers found.</td></tr>
+          {% endfor %}
+        </table>
       {% endif %}
 
       {% if page == 'total' %}
         <h4>All Records</h4>
-        <h5 class="mt-3">Students</h5>
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <tr>
-              <th>Name</th><th>Age</th><th>Grade</th><th>Section</th><th>Gender</th><th>Update</th><th>Delete</th>
-            </tr>
-            {% for stu in students %}
-            <tr>
-              <td>{{ stu.name }}</td>
-              <td>{{ stu.age }}</td>
-              <td>{{ stu.grade }}</td>
-              <td>{{ stu.section }}</td>
-              <td>{{ stu.gender }}</td>
-              <td><a href="{% url 'update_entry' 'student' stu.id %}" class="btn btn-warning btn-sm">Edit</a></td>
-              <td><a href="{% url 'delete_entry' 'student' stu.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a></td>
-            </tr>
-            {% endfor %}
-          </table>
-        </div>
+        
+        <h5 class="mt-4">Students</h5>
+        <table class="table table-bordered">
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Grade</th>
+            <th>Section</th>
+            <th>Gender</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+          {% for stu in students %}
+          <tr>
+            <td>{{ stu.name }}</td>
+            <td>{{ stu.age }}</td>
+            <td>{{ stu.grade }}</td>
+            <td>{{ stu.section }}</td>
+            <td>{{ stu.gender }}</td>
+            <td class="text-center">
+              <a href="{% url 'update_entry' 'student' stu.id %}" class="btn btn-warning btn-sm">Update</a>
+              </td>
+              <td class="text-center">
+              <a href="{% url 'delete_entry' 'student' stu.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="6" class="text-center">No students found.</td></tr>
+          {% endfor %}
+        </table>
 
         <h5 class="mt-4">Teachers</h5>
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <tr>
-              <th>Name</th><th>Subject</th><th>Experience</th><th>Gender</th><th>Update</th><th>Delete</th>
-            </tr>
-            {% for tea in teachers %}
-            <tr>
-              <td>{{ tea.name }}</td>
-              <td>{{ tea.subject }}</td>
-              <td>{{ tea.experience_years }}</td>
-              <td>{{ tea.gender }}</td>
-              <td><a href="{% url 'update_entry' 'teacher' tea.id %}" class="btn btn-warning btn-sm">Edit</a></td>
-              <td><a href="{% url 'delete_entry' 'teacher' tea.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a></td>
-            </tr>
-            {% endfor %}
-          </table>
-        </div>
+        <table class="table table-bordered">
+          <tr>
+            <th>Name</th>
+            <th>Subject</th>
+            <th>Experience</th>
+            <th>Gender</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+          {% for tea in teachers %}
+          <tr>
+            <td>{{ tea.name }}</td>
+            <td>{{ tea.subject }}</td>
+            <td>{{ tea.experience_years }}</td>
+            <td>{{ tea.gender }}</td>
+            <td class="text-center">
+              <a href="{% url 'update_entry' 'teacher' tea.id %}" class="btn btn-warning btn-sm">Update</a>
+              </td>
+              <td class="text-center">
+              <a href="{% url 'delete_entry' 'teacher' tea.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="5" class="text-center">No teachers found.</td></tr>
+          {% endfor %}
+        </table>
       {% endif %}
     </div>
   </div>
