@@ -264,6 +264,143 @@
         font-size: 14px;
       }
     }
+    @media (max-width: 360px) {
+      .nav-tab {
+        flex: 1 1 100%;
+        text-align: center;
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+      .scroll-text {
+        font-size: 12px;
+      }
+      .table {
+        font-size: 10px;
+      }
+      .form-class {
+        width: 100%;
+        padding: 10px;
+      }
+      .form-control {
+        padding: 6px;
+        margin-bottom: 8px;
+      }
+      .form-label {
+        margin-bottom: 4px;
+      }
+      .btn-primary {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+      .btn-warning,
+      .btn-danger {
+        padding: 4px 8px;
+        font-size: 10px;
+      }
+      .logo {
+        width: 50px;
+        height: 50px;
+      }
+      .title-box {
+        font-size: 16px;
+        padding: 8px;
+      }
+      .header-row {
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      .nav-bar {
+        gap: 8px;
+      }
+      .nav-tab {
+        padding: 6px 8px;
+        font-size: 12px;
+      }
+      .scroll-text {
+        font-size: 10px;
+      }
+      .table {
+        font-size: 8px;
+      }
+      .form-control {
+        padding: 4px;
+        margin-bottom: 6px;
+      }
+      .form-label {
+        margin-bottom: 2px;
+      }
+      .btn-primary {
+        padding: 4px 8px;
+        font-size: 10px;
+      }
+      .btn-warning,
+      .btn-danger {
+        padding: 2px 4px;
+        font-size: 8px;
+      }
+      .logo {
+        width: 40px;
+        height: 40px;
+      }
+      .title-box {
+        font-size: 14px;
+        padding: 6px;
+      }
+      .header-row {
+        gap: 6px;
+        margin-bottom: 16px;
+      }
+      .nav-bar {
+        gap: 6px;
+      }
+      .nav-tab {
+        padding: 4px 6px;
+        font-size: 10px;
+      }
+      .scroll-text {
+        font-size: 8px;
+      }
+      .table {
+        font-size: 6px;
+      }
+      .form-control {
+        padding: 2px;
+        margin-bottom: 4px;
+      }
+      .form-label {
+        margin-bottom: 1px;
+      }
+      .btn-primary {
+        padding: 2px 4px;
+        font-size: 8px;
+      }
+      .btn-warning,
+      .btn-danger {
+        padding: 1px 2px;
+        font-size: 6px;
+      }
+      .logo {
+        width: 30px;
+        height: 30px;
+      }
+      .title-box {
+        font-size: 12px;
+        padding: 4px;
+      }
+      .header-row {
+        gap: 4px;
+        margin-bottom: 12px;
+      }
+      .nav-bar {
+        gap: 4px;
+      }
+      .nav-tab {
+        padding: 2px 4px;
+        font-size: 8px;
+        
+      }
+      
+    }
   </style>
 </head>
 
@@ -282,12 +419,26 @@
     </div>
 
     <!-- ===== Navigation Tabs ===== -->
-    <div class="nav-bar">
-      <a class="nav-tab {% if page == 'home' %}active-tab{% endif %}" href="{% url 'home' %}">Home</a>
-      <a class="nav-tab {% if page == 'student' %}active-tab{% endif %}" href="{% url 'student' %}">Student</a>
-      <a class="nav-tab {% if page == 'teacher' %}active-tab{% endif %}" href="{% url 'teacher' %}">Teacher</a>
-      <a class="nav-tab {% if page == 'total' %}active-tab{% endif %}" href="{% url 'total' %}">Total Data</a>
-    </div>
+    <div class="nav-bar" style="justify-content: space-between;">
+
+  <!-- Left Navigation -->
+  <div style="display:flex; gap:15px;">
+    <a class="nav-tab {% if page == 'home' %}active-tab{% endif %}" href="{% url 'home' %}">Home</a>
+    <a class="nav-tab {% if page == 'student' %}active-tab{% endif %}" href="{% url 'student' %}">Student</a>
+    <a class="nav-tab {% if page == 'teacher' %}active-tab{% endif %}" href="{% url 'teacher' %}">Teacher</a>
+    <a class="nav-tab {% if page == 'total' %}active-tab{% endif %}" href="{% url 'total' %}">Total Data</a>
+  </div>
+
+  <!-- Right User Info -->
+  <div style="display:flex; align-items:center; gap:15px;">
+    <span style="font-weight:600; color:#222;">
+      👤 {{ request.user.username }}
+    </span>
+    <a class="nav-tab" href="{% url 'logout' %}">Logout</a>
+  </div>
+
+</div>
+
     <div class="scroll-text" style="display: flex; justify-content: center;">
     <span>Hurry Up Parents📢 Admissions are open , Join our School immediately 📢</span>
   </div><br>    
@@ -390,8 +541,8 @@
               <a href="{% url 'update_entry' 'student' stu.id %}" class="btn btn-warning btn-sm">Update</a>
               </td>
               <td class="text-center">
-              <a href="{% url 'delete_entry' 'student' stu.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
-            </td>
+              <a href="{% url 'delete_entry' 'student' stu.id %}"
+            class="btn btn-danger btn-sm">Delete</a></td>
           </tr>
           {% empty %}
           <tr><td colspan="6" class="text-center">No students found.</td></tr>
@@ -418,8 +569,8 @@
               <a href="{% url 'update_entry' 'teacher' tea.id %}" class="btn btn-warning btn-sm">Update</a>
               </td>
               <td class="text-center">
-              <a href="{% url 'delete_entry' 'teacher' tea.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
-            </td>
+              <a href="{% url 'delete_entry' 'teacher' tea.id %}"
+            class="btn btn-danger btn-sm">Delete</a></td>
           </tr>
           {% empty %}
           <tr><td colspan="5" class="text-center">No teachers found.</td></tr>
