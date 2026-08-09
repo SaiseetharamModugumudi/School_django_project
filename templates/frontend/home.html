@@ -17,6 +17,7 @@
       font-family: "Poppins", sans-serif;
       color: #333;
       background: url("https://images4.alphacoders.com/139/thumb-1920-1397996.png");
+      background: url("https://images4.alphacoders.com/139/thumb-1920-1397996.png") no-repeat center center fixed;
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -106,6 +107,16 @@
       transform: translateY(-2px);
     }
 
+    .logout-tab {
+      background-color: #dc3545;
+      cursor: pointer;
+    }
+
+    .logout-tab:hover {
+      background-color: #a71d2a;
+      color: #fff;
+    }
+
     /* ===== Content Area ===== */
     .content-area {
       border: 2px solid #333;
@@ -145,10 +156,10 @@
     /* ===== Forms ===== */
     .form-class {
       background-color: rgba(15, 105, 195, 0.3);
-      padding: 20px;
+      padding: 28px 32px 30px;
       border-radius: 8px;
       border: 1px solid #ccc;
-      max-width: 500px;
+      max-width: 560px;
       margin: 0 auto 25px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
@@ -156,22 +167,50 @@
     .form-class h4 {
       color: #0b468a;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 26px;
     }
 
-    .form-label {
-      font-weight: bold;
+    .form-class form p {
+      margin: 0 0 18px;
+    }
+
+    .form-class form label {
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 7px;
+      font-weight: 700;
       text-align: left;
     }
 
-    .form-control {
+    .form-class form input,
+    .form-class form select,
+    .form-class form textarea {
+      display: block;
+      width: 100%;
+      min-height: 42px;
+      padding: 9px 12px;
       border-radius: 5px;
       border: 1px solid #ccc;
-      padding: 8px;
-      width: 100%;
-      margin-bottom: 10px;
+      background-color: rgba(255, 255, 255, 0.85);
+    }
+
+    .form-class form textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    .form-class form input:focus,
+    .form-class form select:focus,
+    .form-class form textarea:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(15, 112, 209, 0.25);
+    }
+
+    .form-class form .helptext,
+    .form-class form ul {
+      display: block;
+      margin: 6px 0 0;
+      padding-left: 18px;
+      font-size: 13px;
     }
 
     .btn-primary {
@@ -179,6 +218,9 @@
       border: none;
       color: white;
       font-weight: 600;
+      width: 100%;
+      padding: 10px 16px;
+      margin-top: 4px;
     }
 
     .btn-primary:hover {
@@ -260,7 +302,7 @@
 
       .form-class {
         width: 100%;
-        padding: 15px;
+        padding: 22px 18px 24px;
       }
 
       .nav-tab {
@@ -296,6 +338,10 @@
   <a class="nav-tab {% if page == 'student' %}active-tab{% endif %}" href="{% url 'student' %}">Student</a>
   <a class="nav-tab {% if page == 'teacher' %}active-tab{% endif %}" href="{% url 'teacher' %}">Teacher</a>
   <a class="nav-tab {% if page == 'total' %}active-tab{% endif %}" href="{% url 'total' %}">Total Data</a>
+        <form method="POST" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit" class="nav-tab logout-tab">Logout</button>
+        </form>
 </div>
 <div class="scroll-text" style="display: flex; justify-content: center;">
 <span>Hurry Up Parents📢 Admissions are open , Join our School immediately 📢</span>

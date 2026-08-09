@@ -1,14 +1,50 @@
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from app1.models import schl_students, schl_teachers
 from app1.forms import StudentForm, TeacherForm
 
 
+def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
+    form = AuthenticationForm(request, data=request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        login(request, form.get_user())
+        return redirect('home')
+
+    return render(request, 'registration/login.html', {'form': form})
+
+
+def register_view(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
+    form = UserCreationForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        user = form.save()
+        login(request, user)
+        return redirect('home')
+
+    return render(request, 'registration/register.html', {'form': form})
+
+
+def logout_view(request):
+    if request.method == 'POST':
+        logout(request)
+    return redirect('login')
+
+
+@login_required(login_url='login')
 def home(request):
     return render(request, 'frontend/home.html', {
         'page': 'home'
     })
 
 
+@login_required(login_url='login')
 def student_view(request):
     form = StudentForm(request.POST or None)
     students = schl_students.objects.all()
@@ -24,6 +60,7 @@ def student_view(request):
     })
 
 
+@login_required(login_url='login')
 def teacher_view(request):
     form = TeacherForm(request.POST or None)
     teachers = schl_teachers.objects.all()
@@ -39,6 +76,7 @@ def teacher_view(request):
     })
 
 
+@login_required(login_url='login')
 def total_data(request):
     students = schl_students.objects.all()
     teachers = schl_teachers.objects.all()
@@ -49,6 +87,7 @@ def total_data(request):
     })
 
 
+@login_required(login_url='login')
 def update_entry(request, type, id):
     if type == "student":
         entry = get_object_or_404(schl_students, id=id)
@@ -67,6 +106,7 @@ def update_entry(request, type, id):
         return render(request, 'frontend/update.html', {'form': form, 'type': 'teacher'})
 
 
+@login_required(login_url='login')
 def delete_entry(request, type, id):
     if type == "student":
         get_object_or_404(schl_students, id=id).delete()
